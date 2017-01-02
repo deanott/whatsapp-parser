@@ -30,6 +30,7 @@ class ParserWhatsapp():
 
             #Ignore minority of bad formatted lines. Caused by long paragraph and image attachments.
             #Checks length is within a limit of date
+            #BUG: fudamentally flawed as if the conditions of extraction of the overline message matches this it won't work.
             if len(raw_date) != 10 or len(time) != 8:
                 #New whatsapp data test:
                 if len(raw_date) != 11 or len(time) != 8:

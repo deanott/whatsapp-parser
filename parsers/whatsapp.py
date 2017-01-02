@@ -31,11 +31,12 @@ class ParserWhatsapp():
             #Ignore minority of bad formatted lines. Caused by long paragraph and image attachments.
             #Checks length is within a limit of date
             #BUG: fudamentally flawed as if the conditions of extraction of the overline message matches this it won't work.
-            if len(raw_date) != 10 or len(time) != 8:
-                #New whatsapp data test:
-                if len(raw_date) != 11 or len(time) != 8:
-                    continue
+            # if len(raw_date) != 10 or len(time) != 8:
+            #     continue
 
+            # New whatsapp data test:
+            if len(raw_date) != 11 or len(time) != 8:
+                continue
 
             raw_date = raw_date.replace(",", "")
             year = raw_date.split(" ")[0].split("/")[-1]
@@ -50,9 +51,13 @@ class ParserWhatsapp():
             if "AM" in msg_date or "PM" in msg_date:
                 datetime_obj = datetime.strptime(
                     msg_date, "%m/%d/%y, %I:%M:%S %p")
-            elif "am" in msg_date or "pm" in msg_date:
+            elif "am " in msg_date or "pm " in msg_date:
                 datetime_obj = datetime.strptime(
                     msg_date, "%d/%m/%Y, %I:%M %p ")
+                #To fit with analyse later format like the others
+                sDateTime = datetime_obj.strftime("%m/%d/%y %H:%M:%S")
+                datetime_obj = datetime.strptime(sDateTime, "%m/%d/%y %H:%M:%S")
+
             else:
                 if len(year) == 2:
                     datetime_obj = datetime.strptime(msg_date, "%m/%d/%y %H:%M:%S")

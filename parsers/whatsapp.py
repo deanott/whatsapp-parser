@@ -16,6 +16,7 @@ class ParserWhatsapp():
         list_of_messages = []
         set_of_senders = set()
         for l in self.raw_messages:
+            #BUG: Yeah well this isnt working...
             msg_date, sep, msg = l.partition(": ")
             raw_date, sep, time = msg_date.partition(" ")
             sender, sep, content = msg.partition(": ")

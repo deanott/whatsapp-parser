@@ -24,6 +24,9 @@ class ParserWhatsapp():
             sender, sep, content = msg.partition(": ")
 
             # This ignores a minority of bad formatted lines. A bad formatted line? What makes a date line bad? why would it format wrong?
+            #BUG: Okay new problem, apparently whatsapp thinks it a great idea to when you get emailed the data for file attachments world and seperate out the next message
+            #Real fix = dont download email with attachments!
+            #BUG: Write for long enough whatasapp then creates a new line also. Fantastic.
             # if len(raw_date) != 10 or len(time) != 8:
             #     continue
             raw_date = raw_date.replace(",", "")

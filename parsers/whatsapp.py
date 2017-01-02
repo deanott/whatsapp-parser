@@ -17,6 +17,8 @@ class ParserWhatsapp():
         set_of_senders = set()
         for l in self.raw_messages:
             #BUG: Yeah well this isnt working...
+            #Okay my test data is "03/10/2016, 9:27 pm - Cat: I like cats"
+            #Whatsapp why you gotta update everything?
             msg_date, sep, msg = l.partition(": ")
             raw_date, sep, time = msg_date.partition(" ")
             sender, sep, content = msg.partition(": ")

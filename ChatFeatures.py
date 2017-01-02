@@ -18,6 +18,8 @@ class ChatFeatures():
         self.proportions           = {}
         self.most_used_words       = {}
 
+
+
     def compute_response_time_and_burst(self, list_of_messages, root_name, senders, initiation_thrs=(60*60*8), burst_thrs=3, response_thrs=(60*60*3)):
         # perform the operations that are dependant on multiple messages
         # (response time, bursts)
@@ -142,7 +144,7 @@ class ChatFeatures():
     def compute_message_proportions(self, list_of_messages, senders, root, contact):
         total = 0
         self.proportions = {}
-        categories = ["messages", "words", "chars", "qmarks", "exclams", "media"]
+        categories = ["messages", "words", "chars", "qmarks", "exclams", "media", "punctuationMark"]
         for i in categories:
             self.proportions[i] = {}
             for s in senders:
@@ -165,6 +167,7 @@ class ChatFeatures():
                 msg.content.count('Video Message') +
                 msg.content.count('Sticker')
             )
+            self.proportions["punctuationMark"][msg.sender] += msg.content.count('. ')
             total += 1
 
         self.proportions["avg_words"] = {}

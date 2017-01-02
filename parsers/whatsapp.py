@@ -19,12 +19,13 @@ class ParserWhatsapp():
             #BUG: Yeah well this isnt working...
             #Okay my test data is "03/10/2016, 9:27 pm - Cat: I like cats"
             #Whatsapp why you gotta update everything?
-            msg_date, sep, msg = l.partition(": ")
+            msg_date, sep, msg = l.partition("- ")
             raw_date, sep, time = msg_date.partition(" ")
             sender, sep, content = msg.partition(": ")
-            # This ignores a minority of bad formatted lines.
-            if len(raw_date) != 10 or len(time) != 8:
-                continue
+
+            # This ignores a minority of bad formatted lines. A bad formatted line? What makes a date line bad? why would it format wrong?
+            # if len(raw_date) != 10 or len(time) != 8:
+            #     continue
             raw_date = raw_date.replace(",", "")
             year = raw_date.split(" ")[0].split("/")[-1]
             # The following lines treats:
@@ -38,6 +39,9 @@ class ParserWhatsapp():
             if "AM" in msg_date or "PM" in msg_date:
                 datetime_obj = datetime.strptime(
                     msg_date, "%m/%d/%y, %I:%M:%S %p")
+            elif "am" in msg_date or "pm" in msg_date:
+                datetime_obj = datetime.strptime(
+                    msg_date, "%d/%m/%Y, %I:%M %p ")
             else:
                 if len(year) == 2:
                     datetime_obj = datetime.strptime(msg_date, "%m/%d/%y %H:%M:%S")

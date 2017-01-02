@@ -144,7 +144,7 @@ class ChatFeatures():
     def compute_message_proportions(self, list_of_messages, senders, root, contact):
         total = 0
         self.proportions = {}
-        categories = ["messages", "words", "chars", "qmarks", "exclams", "media", "punctuationMark"]
+        categories = ["messages", "words", "chars", "qmarks", "exclams", "media", "punctuationMark", "stupidsmily"]
         for i in categories:
             self.proportions[i] = {}
             for s in senders:
@@ -168,6 +168,7 @@ class ChatFeatures():
                 msg.content.count('Sticker')
             )
             self.proportions["punctuationMark"][msg.sender] += msg.content.count('. ')
+            self.proportions["stupidsmily"][msg.sender] += msg.content.count(':)')
             total += 1
 
         self.proportions["avg_words"] = {}

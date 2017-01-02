@@ -51,6 +51,7 @@ class ParserWhatsapp():
             if "AM" in msg_date or "PM" in msg_date:
                 datetime_obj = datetime.strptime(
                     msg_date, "%m/%d/%y, %I:%M:%S %p")
+
             elif "am " in msg_date or "pm " in msg_date:
                 datetime_obj = datetime.strptime(
                     msg_date, "%d/%m/%Y, %I:%M %p ")

@@ -27,8 +27,15 @@ class ParserWhatsapp():
             #BUG: Okay new problem, apparently whatsapp thinks it a great idea to when you get emailed the data for file attachments world and seperate out the next message
             #Real fix = dont download email with attachments!
             #BUG: Write for long enough whatasapp then creates a new line also. Fantastic.
-            # if len(raw_date) != 10 or len(time) != 8:
-            #     continue
+
+            #Ignore minority of bad formatted lines. Caused by long paragraph and image attachments.
+            #Checks length is within a limit of date
+            if len(raw_date) != 10 or len(time) != 8:
+                #New whatsapp data test:
+                if len(raw_date) != 11 or len(time) != 8:
+                    continue
+
+
             raw_date = raw_date.replace(",", "")
             year = raw_date.split(" ")[0].split("/")[-1]
             # The following lines treats:
